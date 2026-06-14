@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>肖丽 UI/UX 作品集模板</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#hero">
+          <span>Shinny</span>
+        </a>
+        <nav class="nav">
+          <a href="#design-story" data-nav="design-story" class="nav-link nav-link-story">
+            <img src="./assets/nav-icon-3.svg" class="nav-link-icon" alt="" aria-hidden="true" />
+            <span class="nav-link-label">我与设计</span>
+          </a>
+          <a href="#projects" data-nav="projects" class="nav-link nav-link-projects">
+            <img src="./assets/nav-icon-1.svg" class="nav-link-icon" alt="" aria-hidden="true" />
+            <span class="nav-link-label">作品</span>
+          </a>
+          <a href="#about" data-nav="about" class="nav-link nav-link-about">
+            <img src="./assets/nav-icon-2.svg" class="nav-link-icon" alt="" aria-hidden="true" />
+            <span class="nav-link-label">About Me</span>
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        <section id="hero" class="section hero" data-section="hero">
+          <div class="hero-copy reveal">
+            <div class="hero-layout">
+              <div class="hero-intro">
+                <div class="hero-welcome-stack">
+                  <div class="hero-emotion-switcher" aria-hidden="true">
+                    <img src="./assets/hero-expression-01.svg" alt="" class="hero-emotion hero-emotion-1" />
+                    <img src="./assets/hero-expression-02.svg" alt="" class="hero-emotion hero-emotion-2" />
+                    <img src="./assets/hero-expression-03.svg" alt="" class="hero-emotion hero-emotion-3" />
+                  </div>
+                  <div class="hero-welcome-frame">
+                    <img
+                      src="./assets/hero-welcome-base.svg"
+                      alt="欢迎词"
+                      class="hero-welcome-art"
+                    />
+                    <object
+                      class="hero-pen-animation"
+                      data="./assets/hero-pen-draw-animation.svg"
+                      type="image/svg+xml"
+                      aria-hidden="true"
+                      tabindex="-1"
+                    ></object>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="design-story"
+          class="section design-story"
+          data-section="design-story"
+        >
+          <div class="section-head design-story-head is-hidden">
+            <h2>我与设计</h2>
+            <p>从能力、工具、流程到协作经历，用更立体的方式介绍我如何工作。</p>
+          </div>
+
+          <div class="design-grid">
+            <article class="panel radar-panel reveal">
+              <div class="panel-head">
+                <h3>我的能力</h3>
+                <span>六边形雷达图</span>
+              </div>
+              <svg class="radar-chart" viewBox="0 0 320 320" aria-label="能力雷达图">
+                <g transform="translate(160 160)">
+                  <polygon
+                    points="0,-122 105,-61 105,61 0,122 -105,61 -105,-61"
+                    class="radar-grid outer"
+                  />
+                  <polygon
+                    points="0,-92 79,-46 79,46 0,92 -79,46 -79,-46"
+                    class="radar-grid"
+                  />
+                  <polygon
+                    points="0,-61 53,-31 53,31 0,61 -53,31 -53,-31"
+                    class="radar-grid"
+                  />
+                  <polygon
+                    points="0,-31 27,-15 27,15 0,31 -27,15 -27,-15"
+                    class="radar-grid"
+                  />
+                  <line x1="0" y1="0" x2="0" y2="-122" class="radar-axis" />
+                  <line x1="0" y1="0" x2="105" y2="-61" class="radar-axis" />
+                  <line x1="0" y1="0" x2="105" y2="61" class="radar-axis" />
+                  <line x1="0" y1="0" x2="0" y2="122" class="radar-axis" />
+                  <line x1="0" y1="0" x2="-105" y2="61" class="radar-axis" />
+                  <line x1="0" y1="0" x2="-105" y2="-61" class="radar-axis" />
+
+                  <polygon
+                    points="0,-98 74,-43 86,50 0,104 -69,40 -84,-49"
+                    class="radar-shape"
+                  />
+
+                  <circle cx="0" cy="-98" r="5" class="radar-dot" />
+                  <circle cx="74" cy="-43" r="5" class="radar-dot" />
+                  <circle cx="86" cy="50" r="5" class="radar-dot" />
+                  <circle cx="0" cy="104" r="5" class="radar-dot" />
+                  <circle cx="-69" cy="40" r="5" class="radar-dot" />
+                  <circle cx="-84" cy="-49" r="5" class="radar-dot" />
+
+                  <text x="0" y="-140">用户研究</text>
+                  <text x="118" y="-70">交互设计</text>
+                  <text x="120" y="74">界面表现</text>
+                  <text x="0" y="144">设计系统</text>
+                  <text x="-154" y="74">可用性测试</text>
+                  <text x="-154" y="-70">跨团队协作</text>
+                </g>
+              </svg>
+            </article>
+
+            <article class="panel toolbox-panel reveal">
+              <div class="panel-head">
+                <h3>我的工具箱</h3>
+                <span>Software</span>
+              </div>
+              <div class="tool-logo-grid" aria-label="设计工具列表">
+                <div class="tool-logo-card">
+                  <img src="./assets/tool01.svg" alt="Figma" class="tool-logo-image" />
+                  <span class="tool-logo-name">Figma</span>
+                </div>
+                <div class="tool-logo-card">
+                  <img src="./assets/tool02.svg" alt="ChatGPT" class="tool-logo-image" />
+                  <span class="tool-logo-name">ChatGPT</span>
+                </div>
+                <div class="tool-logo-card">
+                  <img src="./assets/tool03.svg" alt="Codex" class="tool-logo-image" />
+                  <span class="tool-logo-name">Codex</span>
+                </div>
+                <div class="tool-logo-card">
+                  <img src="./assets/tool04.svg" alt="Stitch" class="tool-logo-image" />
+                  <span class="tool-logo-name">Stitch</span>
+                </div>
+                <div class="tool-logo-card">
+                  <img src="./assets/tool05.svg" alt="Claude Design" class="tool-logo-image" />
+                  <span class="tool-logo-name">Claude Design</span>
+                </div>
+                <div class="tool-logo-card">
+                  <img src="./assets/tool06.svg" alt="Deepseek" class="tool-logo-image" />
+                  <span class="tool-logo-name">Deepseek</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel workflow-panel reveal">
+              <div class="panel-head">
+                <h3>AI时代的设计工作流</h3>
+                <span>AI 时代</span>
+              </div>
+              <div class="workflow-flow" aria-label="AI时代设计师横向工作流">
+                <div class="workflow-flow-title">
+                  <p>人定义方向，AI加速过程，设计师完成体验落地。</p>
+                </div>
+
+                <div class="workflow-flow-scroll" aria-label="横向工作流步骤">
+                  <div class="workflow-flow-track">
+                    <article class="flow-card">
+                      <span class="flow-index">01</span>
+                      <div class="flow-icon flow-icon-doodle" aria-hidden="true">
+                        <svg viewBox="0 0 96 96" role="img">
+                          <path d="M31 28c0-10 8-18 18-18s18 8 18 18c0 7-4 12-9 16-4 3-5 6-5 11h-9c0-5-2-8-5-11-5-4-8-9-8-16Z" />
+                          <path d="M43 63h12M45 72h8M50 4v-8M72 14l6-6M78 34h8M22 14l-6-6M16 34H8" />
+                          <path d="M15 57h26v27H15zM23 67h10M23 75h8" />
+                        </svg>
+                      </div>
+                      <h4>输入与目标</h4>
+                      <p>整理设计灵感、需求文档、竞品参考与素材网站，形成清晰上下文。</p>
+                      <span class="flow-role">Brief</span>
+                    </article>
+
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+
+                    <article class="flow-card">
+                      <span class="flow-index">02</span>
+                      <div class="flow-icon flow-icon-tools" aria-hidden="true">
+                        <img src="./assets/tool06.svg" alt="" />
+                        <img src="./assets/tool02.svg" alt="" />
+                      </div>
+                      <h4>AI思考拓展</h4>
+                      <p>与 DeepSeek 多轮对话，完成竞品分析、用户路径和产品架构梳理。</p>
+                      <span class="flow-role">Strategy</span>
+                    </article>
+
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+
+                    <article class="flow-card">
+                      <span class="flow-index">03</span>
+                      <div class="flow-icon flow-icon-doodle" aria-hidden="true">
+                        <svg viewBox="0 0 96 96" role="img">
+                          <path d="M16 20h64v44H16z" />
+                          <path d="M26 32h18M26 44h30M26 56h16M60 34h10v10H60zM54 74h20M48 64l10 10-10 10" />
+                          <path d="M75 18l4-8 4 8 8 4-8 4-4 8-4-8-8-4 8-4Z" />
+                        </svg>
+                      </div>
+                      <h4>生成原型素材</h4>
+                      <p>生成低保真、高保真、场景图、图标、组件素材和风格 Prompt。</p>
+                      <span class="flow-role">Prototype</span>
+                    </article>
+
+                    <div class="flow-arrow flow-arrow-two-way" aria-hidden="true">↔</div>
+
+                    <article class="flow-card flow-card-focus">
+                      <span class="flow-index">04</span>
+                      <div class="flow-icon flow-icon-figma" aria-hidden="true">
+                        <img src="./assets/tool01.svg" alt="" />
+                      </div>
+                      <h4>设计实现</h4>
+                      <p>设计师在 Figma 中整合方案、统一视觉体验，完成正式设计稿。</p>
+                      <span class="flow-role">Design</span>
+                    </article>
+
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+
+                    <article class="flow-card">
+                      <span class="flow-index">05</span>
+                      <div class="flow-icon flow-icon-doodle" aria-hidden="true">
+                        <svg viewBox="0 0 96 96" role="img">
+                          <path d="M17 22h48v42H17z" />
+                          <path d="M29 38l-8 8 8 8M49 38l8 8-8 8M43 34l-8 24" />
+                          <circle cx="68" cy="68" r="12" />
+                          <path d="M77 77l10 10M64 68l4 4 8-9" />
+                        </svg>
+                      </div>
+                      <h4>开发与走查</h4>
+                      <p>开发实现后进行设计走查，检查还原度、交互细节并反馈迭代。</p>
+                      <span class="flow-role">Delivery</span>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section id="projects" class="section projects" data-section="projects">
+          <div class="section-head reveal">
+            <div class="projects-title-wrap">
+              <span class="projects-title-balance" aria-hidden="true">
+                <img src="./assets/balance.svg" alt="" />
+              </span>
+              <h2>我的作品</h2>
+            </div>
+          </div>
+
+          <div class="project-list">
+            <article class="project-row reveal project-left">
+              <div class="project-meta project-copy">
+                <h3>情绪花园</h3>
+                <p class="project-desc">以记录生活日常和情绪反应为主的 模拟种花养成系小游戏</p>
+                <p class="project-time">2025</p>
+                <div class="project-tags">
+                  <span class="project-tag-medium">UI/UX</span>
+                  <span class="project-tag-long">Mobile端</span>
+                </div>
+              </div>
+              <a
+                class="project-cover cover-a tilt-card project-cover-link"
+                href="./emotion-garden-detail.html"
+                aria-label="打开情绪花园项目详情"
+              >
+                <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
+                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                </span>
+                <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
+                  <img
+                    src="./assets/project-cover-decor-bottom-left.svg"
+                    alt=""
+                    class="project-cover-ornament-image"
+                  />
+                </span>
+                <div class="project-cover-media">
+                  <img src="./assets/emotion-garden-cover.png" alt="情绪花园项目封面" class="project-cover-image" />
+                </div>
+              </a>
+            </article>
+
+            <article class="project-row reveal project-right">
+              <div class="project-meta project-copy">
+                <h3>轻游梦工坊官网</h3>
+                <p class="project-desc">腾讯旗下无代码游戏编辑器的官方网站和小程序，为创作者提供社区交流、文档教程的平台</p>
+                <p class="project-time">2024-2025</p>
+                <div class="project-tags">
+                  <span class="project-tag-short">UI</span>
+                  <span class="project-tag-medium">Web端</span>
+                  <span class="project-tag-long">Mobile端</span>
+                </div>
+              </div>
+              <a
+                class="project-cover cover-b tilt-card project-cover-link"
+                href="./qingyou-detail.html"
+                aria-label="打开轻游梦工坊官网项目详情"
+              >
+                <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
+                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                </span>
+                <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
+                  <img
+                    src="./assets/project-cover-decor-bottom-left.svg"
+                    alt=""
+                    class="project-cover-ornament-image"
+                  />
+                </span>
+                <div class="project-cover-media">
+                  <img src="./assets/project-cover-2.png" alt="轻游梦工坊官网项目封面" class="project-cover-image" />
+                </div>
+              </a>
+            </article>
+
+            <article class="project-row reveal project-left">
+              <div class="project-meta project-copy">
+                <h3>Tencent XR</h3>
+                <p class="project-desc">XR（扩展现实技术），从头显端到官网的全方位原生系统建设。</p>
+                <p class="project-time">2022</p>
+                <div class="project-tags">
+                  <span class="project-tag-medium">UI/UX</span>
+                  <span class="project-tag-long">头显端</span>
+                  <span class="project-tag-xl">智能硬件设计</span>
+                  <span class="project-tag-medium">Web端</span>
+                </div>
+              </div>
+              <a
+                class="project-cover cover-d tilt-card project-cover-link"
+                href="./tencent-xr-detail.html"
+                aria-label="打开Tencent XR项目详情"
+              >
+                <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
+                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                </span>
+                <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
+                  <img
+                    src="./assets/project-cover-decor-bottom-left.svg"
+                    alt=""
+                    class="project-cover-ornament-image"
+                  />
+                </span>
+                <div class="project-cover-media">
+                  <img src="./assets/xr-cover-home.png" alt="Tencent XR 项目封面" class="project-cover-image" />
+                </div>
+              </a>
+            </article>
+
+            <article class="project-row reveal project-right">
+              <div class="project-meta project-copy">
+                <h3>AIGC运营设计</h3>
+                <p class="project-desc">在AI对话中轻松学习口语</p>
+                <p class="project-time">2026</p>
+                <div class="project-tags">
+                  <span class="project-tag-medium">UI/UX</span>
+                  <span class="project-tag-long">Mobile端</span>
+                </div>
+              </div>
+              <a
+                class="project-cover cover-c tilt-card project-cover-link"
+                href="./lingo-ai-detail.html"
+                aria-label="打开Lingo AI项目详情"
+              >
+                <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
+                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                </span>
+                <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
+                  <img
+                    src="./assets/project-cover-decor-bottom-left.svg"
+                    alt=""
+                    class="project-cover-ornament-image"
+                  />
+                </span>
+                <div class="project-cover-media">
+                  <img src="./assets/project-cover-3.png" alt="Lingo AI 项目封面" class="project-cover-image" />
+                </div>
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section id="about" class="section about" data-section="about">
+          <div class="section-head reveal">
+            <h2>生活里的我</h2>
+          </div>
+
+          <div class="about-stack">
+            <article class="about-card reveal">
+              <div class="about-intro">
+                <div>
+                  <h3>极简主义者</h3>
+                  <p>
+                    我的一平米厨房，做饭只放油和生抽。简单的材料、固定的流程，也能过得很有秩序。
+                  </p>
+                </div>
+              </div>
+              <div class="about-gallery about-gallery-minimalism" aria-label="极简主义作品展示">
+                <div class="about-gallery-minimalism-row">
+                  <img src="./assets/minimalism-01.svg" alt="极简主义作品 1" class="minimalism-item" />
+                  <img src="./assets/minimalism-02.svg" alt="极简主义作品 2" class="minimalism-item" />
+                </div>
+                <div class="about-gallery-minimalism-row">
+                  <img src="./assets/minimalism-03.svg" alt="极简主义作品 3" class="minimalism-item" />
+                  <img src="./assets/minimalism-04.svg" alt="极简主义作品 4" class="minimalism-item" />
+                </div>
+              </div>
+            </article>
+
+            <article class="about-card about-card-routine reveal">
+              <div class="routine-app-cloud" aria-hidden="true">
+                <img
+                  src="assets/self-life-app-02.svg"
+                  alt=""
+                  class="routine-scatter-icon routine-scatter-icon-1"
+                />
+                <img
+                  src="assets/self-life-app-01.svg"
+                  alt=""
+                  class="routine-scatter-icon routine-scatter-icon-2"
+                />
+                <img
+                  src="assets/self-life-app-03.svg"
+                  alt=""
+                  class="routine-scatter-icon routine-scatter-icon-3"
+                />
+                <img
+                  src="assets/self-life-app-04.svg"
+                  alt=""
+                  class="routine-scatter-icon routine-scatter-icon-4"
+                />
+              </div>
+              <div class="about-intro">
+                <div>
+                  <h3>自我生活的管理者</h3>
+                  <p>
+                    用 Apple 原生 APP 的日历、账单、周复盘和日记，打造程序化又温柔的日常系统。
+                  </p>
+                </div>
+              </div>
+              <div class="about-gallery about-gallery-routine">
+                <figure class="memory-shot routine-calendar-frame">
+                  <img src="assets/self-life-calendar-frame.png" alt="2026年5月的日历周视图记录" />
+                  <figcaption class="routine-scroll-hint">
+                    <img src="assets/routine-color-key.svg" alt="" aria-hidden="true" class="routine-scroll-hint-icon" />
+                    <span>一周日程</span>
+                  </figcaption>
+                </figure>
+                <figure class="memory-shot routine-scroll-shot">
+                  <div class="routine-scroll-window" aria-label="摸狗丽丽的记录分享，可滚动查看完整内容">
+                    <img src="assets/self-life-dog-record.svg" alt="摸狗丽丽的记录分享长图记录" />
+                  </div>
+                  <figcaption class="routine-scroll-hint">
+                    <img src="assets/routine-color-key.svg" alt="" aria-hidden="true" class="routine-scroll-hint-icon" />
+                    <span>色块解释</span>
+                  </figcaption>
+                </figure>
+              </div>
+            </article>
+
+            <article class="acknowledgements reveal" aria-label="致谢">
+              <div class="acknowledgements-aside" aria-hidden="true">
+                <div class="acknowledgements-aside-art">
+                  <span class="acknowledgements-title">Thanks</span>
+                  <img
+                    src="./assets/acknowledgement-chat.svg"
+                    alt=""
+                    class="acknowledgement-doodle acknowledgement-doodle-left"
+                  />
+                  <img
+                    src="./assets/acknowledgement-fingers-crossed.svg"
+                    alt=""
+                    class="acknowledgement-doodle acknowledgement-doodle-right"
+                  />
+                </div>
+              </div>
+              <div class="acknowledgements-body">
+                <p class="acknowledgement-line acknowledgement-line-1">
+                  <span>感谢</span>
+                  <span class="acknowledgement-name">
+                    <img src="./assets/tool03.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
+                    <span>codex</span>
+                  </span>
+                  <span>支持我编写个人网站</span>
+                </p>
+                <p class="acknowledgement-line acknowledgement-line-2">
+                  <span>感谢</span>
+                  <span class="acknowledgement-name">
+                    <img src="./assets/tool01.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
+                    <span>Figma</span>
+                  </span>
+                  <span>永恒的陪伴</span>
+                </p>
+                <p class="acknowledgement-line acknowledgement-line-3">
+                  <span>感谢</span>
+                  <span class="acknowledgement-name">
+                    <img src="./assets/tool02.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
+                    <span>GPT</span>
+                  </span>
+                  <span>作为我设计上的朋友</span>
+                </p>
+                <p class="acknowledgement-line acknowledgement-line-5">
+                  <span>感谢</span>
+                  <span class="acknowledgement-name">
+                    <img src="./assets/friend-dengkai-photo.png" alt="" class="acknowledgement-avatar" aria-hidden="true" />
+                    <span>Dengkai</span>
+                  </span>
+                  <span>的技术支持</span>
+                </p>
+                <p class="acknowledgement-line acknowledgement-line-6">
+                  <span>感谢</span>
+                  <span class="acknowledgement-name">
+                    <img src="./assets/friend-zhixuan-photo.png" alt="" class="acknowledgement-avatar" aria-hidden="true" />
+                    <span>Zhixuan</span>
+                  </span>
+                  <span>的设计指导</span>
+                </p>
+                <p class="acknowledgement-line acknowledgement-line-7">
+                  <span>感谢</span>
+                  <span class="acknowledgement-name">
+                    <img src="./assets/friend-joy-photo.png" alt="" class="acknowledgement-avatar" aria-hidden="true" />
+                    <span>Joy</span>
+                  </span>
+                  <span>的精神支持</span>
+                </p>
+                <p class="acknowledgement-line acknowledgement-line-8 acknowledgement-line-last">感谢看到这里的你</p>
+                <div class="acknowledgement-closing-mark" aria-hidden="true">
+                  <img src="./assets/underline-squiggle-3.svg" alt="" class="acknowledgement-closing-squiggle" />
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,328 @@
+const sectionMap = {
+  projects: "projects",
+  "design-story": "design-story",
+  about: "about",
+};
+
+const CLICK_EFFECT_DEFAULT_COLOR = "#b9372e";
+const CLICK_EFFECT_FALLBACK_COLOR = "#b8b8b8";
+const CLICK_EFFECT_CONFLICT_RGB = [185, 55, 46];
+const CLICK_EFFECT_IMAGE_TOLERANCE = 18;
+const CLICK_EFFECT_COLOR_PROPS = [
+  "backgroundColor",
+  "color",
+  "borderTopColor",
+  "borderRightColor",
+  "borderBottomColor",
+  "borderLeftColor",
+  "outlineColor",
+  "textDecorationColor",
+  "fill",
+  "stroke",
+];
+const CLICK_EFFECT_RED_IMAGE_MARKERS = [
+  "nav-tab-active.svg",
+  "nav-tab-wide-active.svg",
+  "detail-nav-fill.svg",
+  "detail-home-solid-red.svg",
+];
+
+const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+const observedSections = Array.from(document.querySelectorAll("[data-section]"));
+const revealItems = Array.from(document.querySelectorAll(".reveal"));
+const clickEffectCanvas = document.createElement("canvas");
+const clickEffectContext = clickEffectCanvas.getContext("2d", { willReadFrequently: true });
+
+function parseColorChannels(value) {
+  if (!value) {
+    return null;
+  }
+
+  const normalized = value.trim().toLowerCase();
+
+  if (normalized.startsWith("#")) {
+    let hex = normalized.slice(1);
+    if (hex.length === 3) {
+      hex = hex.split("").map((char) => char + char).join("");
+    }
+
+    if (hex.length !== 6 || /[^0-9a-f]/.test(hex)) {
+      return null;
+    }
+
+    return [
+      Number.parseInt(hex.slice(0, 2), 16),
+      Number.parseInt(hex.slice(2, 4), 16),
+      Number.parseInt(hex.slice(4, 6), 16),
+    ];
+  }
+
+  const match = normalized.match(/^rgba?\(([^)]+)\)$/);
+  if (!match) {
+    return null;
+  }
+
+  const channels = match[1]
+    .split(",")
+    .slice(0, 3)
+    .map((part) => Number.parseFloat(part.trim()));
+
+  if (channels.length !== 3 || channels.some((channel) => !Number.isFinite(channel))) {
+    return null;
+  }
+
+  return channels.map((channel) => Math.round(channel));
+}
+
+function isConflictClickColor(value) {
+  const channels = parseColorChannels(value);
+  if (!channels) {
+    return false;
+  }
+
+  return channels.every((channel, index) => channel === CLICK_EFFECT_CONFLICT_RGB[index]);
+}
+
+function isNearConflictClickColor(channels) {
+  if (!channels || channels.length < 3) {
+    return false;
+  }
+
+  return channels.slice(0, 3).every((channel, index) => {
+    return Math.abs(channel - CLICK_EFFECT_CONFLICT_RGB[index]) <= CLICK_EFFECT_IMAGE_TOLERANCE;
+  });
+}
+
+function hasConflictBackgroundImage(value) {
+  if (!value || value === "none") {
+    return false;
+  }
+
+  const normalized = value.toLowerCase();
+  return CLICK_EFFECT_RED_IMAGE_MARKERS.some((marker) => normalized.includes(marker));
+}
+
+function hasConflictVisualStyle(node, pseudoElement = null) {
+  const computedStyle = window.getComputedStyle(node, pseudoElement);
+
+  if (CLICK_EFFECT_COLOR_PROPS.some((prop) => isConflictClickColor(computedStyle[prop]))) {
+    return true;
+  }
+
+  return hasConflictBackgroundImage(computedStyle.backgroundImage);
+}
+
+function sampleImageConflictAtPoint(image, clientX, clientY) {
+  if (!clickEffectContext || !image?.complete || !image.naturalWidth || !image.naturalHeight) {
+    return false;
+  }
+
+  const rect = image.getBoundingClientRect();
+  if (!rect.width || !rect.height) {
+    return false;
+  }
+
+  const relativeX = (clientX - rect.left) / rect.width;
+  const relativeY = (clientY - rect.top) / rect.height;
+
+  if (relativeX < 0 || relativeX > 1 || relativeY < 0 || relativeY > 1) {
+    return false;
+  }
+
+  const sampleX = Math.max(0, Math.min(image.naturalWidth - 1, Math.round(relativeX * (image.naturalWidth - 1))));
+  const sampleY = Math.max(0, Math.min(image.naturalHeight - 1, Math.round(relativeY * (image.naturalHeight - 1))));
+
+  clickEffectCanvas.width = 3;
+  clickEffectCanvas.height = 3;
+
+  try {
+    clickEffectContext.clearRect(0, 0, 3, 3);
+    clickEffectContext.drawImage(image, sampleX - 1, sampleY - 1, 3, 3, 0, 0, 3, 3);
+    const pixels = clickEffectContext.getImageData(0, 0, 3, 3).data;
+
+    for (let index = 0; index < pixels.length; index += 4) {
+      const alpha = pixels[index + 3];
+      if (alpha < 32) {
+        continue;
+      }
+
+      if (isNearConflictClickColor([pixels[index], pixels[index + 1], pixels[index + 2]])) {
+        return true;
+      }
+    }
+  } catch {
+    return false;
+  }
+
+  return false;
+}
+
+function shouldUseFallbackClickColor(target, event) {
+  let node = target instanceof Element ? target : target?.parentElement;
+
+  while (node) {
+    if (hasConflictVisualStyle(node) || hasConflictVisualStyle(node, "::before") || hasConflictVisualStyle(node, "::after")) {
+      return true;
+    }
+
+    if (node instanceof HTMLImageElement && sampleImageConflictAtPoint(node, event.clientX, event.clientY)) {
+      return true;
+    }
+
+    node = node.parentElement;
+  }
+
+  return false;
+}
+
+function syncDetailObjectAspectRatio() {
+  const detailObject = document.querySelector(".detail-object");
+  if (!detailObject || detailObject.tagName !== "OBJECT") {
+    return;
+  }
+
+  function applyAspectRatio(width, height) {
+    if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
+      return false;
+    }
+
+    detailObject.style.setProperty("--detail-object-aspect", `${width} / ${height}`);
+    return true;
+  }
+
+  function parseSvgRoot(svgRoot) {
+    if (!svgRoot) {
+      return false;
+    }
+
+    const viewBox = svgRoot.getAttribute("viewBox");
+    if (viewBox) {
+      const parts = viewBox.trim().split(/[\s,]+/).map(Number);
+      if (parts.length === 4 && applyAspectRatio(parts[2], parts[3])) {
+        return true;
+      }
+    }
+
+    const width = Number.parseFloat(svgRoot.getAttribute("width") || "");
+    const height = Number.parseFloat(svgRoot.getAttribute("height") || "");
+    return applyAspectRatio(width, height);
+  }
+
+  function updateFromLoadedObject() {
+    const svgRoot = detailObject.contentDocument?.documentElement;
+    parseSvgRoot(svgRoot);
+  }
+
+  detailObject.addEventListener("load", updateFromLoadedObject);
+
+  if (detailObject.contentDocument?.documentElement) {
+    updateFromLoadedObject();
+  } else if (detailObject.data) {
+    fetch(detailObject.data)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to load SVG: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((svgText) => {
+        const svgDoc = new DOMParser().parseFromString(svgText, "image/svg+xml");
+        parseSvgRoot(svgDoc.documentElement);
+      })
+      .catch(() => {
+        // Keep the fallback aspect ratio when the SVG cannot be inspected.
+      });
+  }
+}
+
+function setActiveNav(key) {
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.dataset.nav === key);
+  });
+}
+
+function updateActiveNavByScroll() {
+  const checkpoint = window.innerHeight * 0.36;
+  let currentSection = "hero";
+
+  observedSections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= checkpoint) {
+      currentSection = section.dataset.section;
+    }
+  });
+
+  const mapped = sectionMap[currentSection];
+  if (mapped) {
+    setActiveNav(mapped);
+  } else {
+    navLinks.forEach((link) => link.classList.remove("active"));
+  }
+}
+
+updateActiveNavByScroll();
+window.addEventListener("scroll", updateActiveNavByScroll, { passive: true });
+window.addEventListener("resize", updateActiveNavByScroll);
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    });
+  },
+  {
+    threshold: 0.18,
+    rootMargin: "0px 0px -8% 0px",
+  }
+);
+
+function initGlobalClickEffect() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const layer = document.createElement("div");
+  layer.className = "click-effect-layer";
+  layer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(layer);
+
+  const burstMarkup = `
+    <svg viewBox="0 0 72 72" aria-hidden="true">
+      <path d="M35.6 24.2 C35.9 21.9 36.3 20.1 36.8 18.3" />
+      <path d="M43.8 27.2 C45.3 25.4 46.9 24.1 48.9 22.8" />
+      <path d="M47.7 35.1 C50 34.6 51.9 34.4 54 34.4" />
+      <path d="M24.2 36.8 C21.9 36.9 20.1 36.7 18.1 36.1" />
+      <path d="M26.9 28.1 C25.3 26.8 24 25.5 22.8 23.5" />
+    </svg>
+  `;
+
+  document.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0 || event.pointerType === "touch") {
+      return;
+    }
+
+    const burst = document.createElement("div");
+    burst.className = "click-effect-burst";
+    burst.style.left = `${event.clientX}px`;
+    burst.style.top = `${event.clientY}px`;
+    burst.style.color = shouldUseFallbackClickColor(event.target, event)
+      ? CLICK_EFFECT_FALLBACK_COLOR
+      : CLICK_EFFECT_DEFAULT_COLOR;
+    burst.innerHTML = burstMarkup;
+    layer.appendChild(burst);
+
+    burst.addEventListener("animationend", () => {
+      burst.remove();
+    }, { once: true });
+  });
+}
+
+initGlobalClickEffect();
+syncDetailObjectAspectRatio();
+
+revealItems.forEach((item, index) => {
+  item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+  revealObserver.observe(item);
+});
