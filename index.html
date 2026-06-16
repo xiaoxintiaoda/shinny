@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shinny的作品集</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="./assets/brand/favicon.svg" />
     <link rel="stylesheet" href="./styles.css?v=20260616-loading" />
   </head>
   <body>
@@ -16,6 +16,9 @@
       aria-label="正在进入Shinny的作品集"
     >
       <div class="site-loading-card">
+        <div class="site-loading-avatar" aria-hidden="true">
+          <img src="./assets/hero/expression-01.svg" alt="" decoding="async" />
+        </div>
         <p class="site-loading-text">正在进入Shinny的作品集</p>
         <div class="site-loading-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <span class="site-loading-bar"></span>
@@ -29,15 +32,15 @@
         </a>
         <nav class="nav">
           <a href="#hero" data-nav="hero" class="nav-link nav-link-home active" aria-current="page">
-            <img src="./assets/nav-icon-home.svg" class="nav-link-icon" alt="" aria-hidden="true" />
+            <img src="./assets/nav/icon-home.svg" class="nav-link-icon" alt="" aria-hidden="true" />
             <span class="nav-link-label">首页</span>
           </a>
           <a href="#projects" data-nav="projects" class="nav-link nav-link-projects">
-            <img src="./assets/nav-icon-1.svg" class="nav-link-icon" alt="" aria-hidden="true" />
+            <img src="./assets/nav/icon-projects.svg" class="nav-link-icon" alt="" aria-hidden="true" />
             <span class="nav-link-label">作品</span>
           </a>
           <a href="#about" data-nav="about" class="nav-link nav-link-about">
-            <img src="./assets/nav-icon-2.svg" class="nav-link-icon" alt="" aria-hidden="true" />
+            <img src="./assets/nav/icon-about.svg" class="nav-link-icon" alt="" aria-hidden="true" />
             <span class="nav-link-label">About Me</span>
           </a>
         </nav>
@@ -50,13 +53,13 @@
               <div class="hero-intro">
                 <div class="hero-welcome-stack">
                   <div class="hero-emotion-switcher" aria-hidden="true">
-                    <img src="./assets/hero-expression-01.svg" alt="" class="hero-emotion hero-emotion-1" />
-                    <img src="./assets/hero-expression-03.svg" alt="" class="hero-emotion hero-emotion-2" />
-                    <img src="./assets/hero-expression-02.svg" alt="" class="hero-emotion hero-emotion-3" />
+                    <img src="./assets/hero/expression-01.svg" alt="" class="hero-emotion hero-emotion-1" />
+                    <img src="./assets/hero/expression-03.svg" alt="" class="hero-emotion hero-emotion-2" />
+                    <img src="./assets/hero/expression-02.svg" alt="" class="hero-emotion hero-emotion-3" />
                   </div>
                   <div class="hero-welcome-frame">
                     <img
-                      src="./assets/hero-welcome-base.svg"
+                      src="./assets/hero/welcome-base.svg"
                       alt="欢迎词"
                       class="hero-welcome-art"
                       decoding="async"
@@ -64,7 +67,7 @@
                     />
                     <object
                       class="hero-pen-animation"
-                      data="./assets/hero-pen-draw-animation.svg"
+                      data="./assets/hero/pen-draw-animation.svg"
                       type="image/svg+xml"
                       aria-hidden="true"
                       tabindex="-1"
@@ -147,27 +150,27 @@
               </div>
               <div class="tool-logo-grid" aria-label="设计工具列表">
                 <div class="tool-logo-card">
-                  <img src="./assets/tool01.svg" alt="Figma" class="tool-logo-image" />
+                  <img src="./assets/tools/figma.svg" alt="Figma" class="tool-logo-image" />
                   <span class="tool-logo-name">Figma</span>
                 </div>
                 <div class="tool-logo-card">
-                  <img src="./assets/tool02.svg" alt="ChatGPT" class="tool-logo-image" />
+                  <img src="./assets/tools/chatgpt.svg" alt="ChatGPT" class="tool-logo-image" />
                   <span class="tool-logo-name">ChatGPT</span>
                 </div>
                 <div class="tool-logo-card">
-                  <img src="./assets/tool03.svg" alt="Codex" class="tool-logo-image" />
+                  <img src="./assets/optimized/tool03.webp" alt="Codex" class="tool-logo-image" />
                   <span class="tool-logo-name">Codex</span>
                 </div>
                 <div class="tool-logo-card">
-                  <img src="./assets/tool04.svg" alt="Stitch" class="tool-logo-image" />
+                  <img src="./assets/tools/stitch.svg" alt="Stitch" class="tool-logo-image" />
                   <span class="tool-logo-name">Stitch</span>
                 </div>
                 <div class="tool-logo-card">
-                  <img src="./assets/tool05.svg" alt="Claude Design" class="tool-logo-image" />
+                  <img src="./assets/tools/claude-design.svg" alt="Claude Design" class="tool-logo-image" />
                   <span class="tool-logo-name">Claude Design</span>
                 </div>
                 <div class="tool-logo-card">
-                  <img src="./assets/tool06.svg" alt="Deepseek" class="tool-logo-image" />
+                  <img src="./assets/tools/deepseek.svg" alt="Deepseek" class="tool-logo-image" />
                   <span class="tool-logo-name">Deepseek</span>
                 </div>
               </div>
@@ -204,8 +207,8 @@
                     <article class="flow-card">
                       <span class="flow-index">02</span>
                       <div class="flow-icon flow-icon-tools" aria-hidden="true">
-                        <img src="./assets/tool06.svg" alt="" />
-                        <img src="./assets/tool02.svg" alt="" />
+                        <img src="./assets/tools/deepseek.svg" alt="" />
+                        <img src="./assets/tools/chatgpt.svg" alt="" />
                       </div>
                       <h4>AI思考拓展</h4>
                       <p>与 DeepSeek 多轮对话，完成竞品分析、用户路径和产品架构梳理。</p>
@@ -233,7 +236,7 @@
                     <article class="flow-card flow-card-focus">
                       <span class="flow-index">04</span>
                       <div class="flow-icon flow-icon-figma" aria-hidden="true">
-                        <img src="./assets/tool01.svg" alt="" />
+                        <img src="./assets/tools/figma.svg" alt="" />
                       </div>
                       <h4>设计实现</h4>
                       <p>设计师在 Figma 中整合方案、统一视觉体验，完成正式设计稿。</p>
@@ -268,7 +271,7 @@
           <div class="section-head reveal">
             <div class="projects-title-wrap">
               <span class="projects-title-balance" aria-hidden="true">
-                <img src="./assets/balance.svg" alt="" />
+                <img src="./assets/about/balance.svg" alt="" />
               </span>
               <h2>我的作品</h2>
             </div>
@@ -280,8 +283,8 @@
                 <h3>情绪花园</h3>
                 <p class="project-desc">以记录生活日常和情绪反应为主的 模拟种花养成系小游戏</p>
                 <div class="project-tags">
-                  <span class="project-tag-medium">UI/UX</span>
-                  <span class="project-tag-long">Mobile端</span>
+                  <span class="project-tag-medium"><span class="project-tag-label">UI/UX</span></span>
+                  <span class="project-tag-long"><span class="project-tag-label">Mobile端</span></span>
                 </div>
               </div>
               <a
@@ -290,11 +293,11 @@
                 aria-label="打开情绪花园项目详情"
               >
                 <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
-                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                  <img src="./assets/projects/cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
                 </span>
                 <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
                   <img
-                    src="./assets/project-cover-decor-bottom-left.svg"
+                    src="./assets/projects/cover-decor-bottom-left.svg"
                     alt=""
                     class="project-cover-ornament-image"
                   />
@@ -316,9 +319,9 @@
                 <h3>轻游梦工坊官网</h3>
                 <p class="project-desc">腾讯旗下无代码游戏编辑器的官方网站和小程序，为创作者提供社区交流、文档教程的平台</p>
                 <div class="project-tags">
-                  <span class="project-tag-short">UI</span>
-                  <span class="project-tag-medium">Web端</span>
-                  <span class="project-tag-long">Mobile端</span>
+                  <span class="project-tag-short"><span class="project-tag-label">UI</span></span>
+                  <span class="project-tag-medium"><span class="project-tag-label">Web端</span></span>
+                  <span class="project-tag-long"><span class="project-tag-label">Mobile端</span></span>
                 </div>
               </div>
               <a
@@ -327,11 +330,11 @@
                 aria-label="打开轻游梦工坊官网项目详情"
               >
                 <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
-                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                  <img src="./assets/projects/cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
                 </span>
                 <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
                   <img
-                    src="./assets/project-cover-decor-bottom-left.svg"
+                    src="./assets/projects/cover-decor-bottom-left.svg"
                     alt=""
                     class="project-cover-ornament-image"
                   />
@@ -353,10 +356,10 @@
                 <h3>Tencent XR</h3>
                 <p class="project-desc">XR（扩展现实技术），从头显端到官网的全方位原生系统建设。</p>
                 <div class="project-tags">
-                  <span class="project-tag-medium">UI/UX</span>
-                  <span class="project-tag-long">头显端</span>
-                  <span class="project-tag-xl">智能硬件设计</span>
-                  <span class="project-tag-medium">Web端</span>
+                  <span class="project-tag-medium"><span class="project-tag-label">UI/UX</span></span>
+                  <span class="project-tag-long"><span class="project-tag-label">头显端</span></span>
+                  <span class="project-tag-xl"><span class="project-tag-label">智能硬件设计</span></span>
+                  <span class="project-tag-medium"><span class="project-tag-label">Web端</span></span>
                 </div>
               </div>
               <a
@@ -365,11 +368,11 @@
                 aria-label="打开Tencent XR项目详情"
               >
                 <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
-                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                  <img src="./assets/projects/cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
                 </span>
                 <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
                   <img
-                    src="./assets/project-cover-decor-bottom-left.svg"
+                    src="./assets/projects/cover-decor-bottom-left.svg"
                     alt=""
                     class="project-cover-ornament-image"
                   />
@@ -391,8 +394,8 @@
                 <h3>AIGC运营设计</h3>
                 <p class="project-desc">在AI对话中轻松学习口语</p>
                 <div class="project-tags">
-                  <span class="project-tag-medium">UI/UX</span>
-                  <span class="project-tag-long">Mobile端</span>
+                  <span class="project-tag-medium"><span class="project-tag-label">UI/UX</span></span>
+                  <span class="project-tag-long"><span class="project-tag-label">Mobile端</span></span>
                 </div>
               </div>
               <div
@@ -401,11 +404,11 @@
                 aria-disabled="true"
               >
                 <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
-                  <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
+                  <img src="./assets/projects/cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
                 </span>
                 <span class="project-cover-ornament ornament-bottom-left" aria-hidden="true">
                   <img
-                    src="./assets/project-cover-decor-bottom-left.svg"
+                    src="./assets/projects/cover-decor-bottom-left.svg"
                     alt=""
                     class="project-cover-ornament-image"
                   />
@@ -429,7 +432,7 @@
           <div class="about-rabbit-scene" aria-hidden="true">
             <span class="about-rabbit-dust about-rabbit-dust-1"></span>
             <span class="about-rabbit-dust about-rabbit-dust-2"></span>
-            <img src="./assets/rabbit.svg" alt="" class="about-rabbit" />
+            <img src="./assets/about/rabbit.svg" alt="" class="about-rabbit" />
           </div>
           <div class="section-head reveal">
             <h2>生活里的我</h2>
@@ -448,14 +451,14 @@
               <div class="about-gallery about-gallery-minimalism" aria-label="极简主义作品展示">
                 <div class="about-gallery-minimalism-row">
                   <img
-                    src="./assets/minimalism-01.svg"
+                    src="./assets/optimized/minimalism-01.webp"
                     alt="极简主义作品 1"
                     class="minimalism-item"
                     loading="lazy"
                     decoding="async"
                   />
                   <img
-                    src="./assets/minimalism-02.svg"
+                    src="./assets/optimized/minimalism-02.webp"
                     alt="极简主义作品 2"
                     class="minimalism-item"
                     loading="lazy"
@@ -464,14 +467,14 @@
                 </div>
                 <div class="about-gallery-minimalism-row">
                   <img
-                    src="./assets/minimalism-03.svg"
+                    src="./assets/optimized/minimalism-03.webp"
                     alt="极简主义作品 3"
                     class="minimalism-item"
                     loading="lazy"
                     decoding="async"
                   />
                   <img
-                    src="./assets/minimalism-04.svg"
+                    src="./assets/optimized/minimalism-04.webp"
                     alt="极简主义作品 4"
                     class="minimalism-item"
                     loading="lazy"
@@ -493,22 +496,22 @@
               <div class="about-gallery about-gallery-routine">
                 <div class="routine-app-cloud" aria-hidden="true">
                   <img
-                    src="assets/self-life-app-02.svg"
+                    src="assets/optimized/self-life-app-02.webp"
                     alt=""
                     class="routine-scatter-icon routine-scatter-icon-1"
                   />
                   <img
-                    src="assets/self-life-app-01.svg"
+                    src="assets/optimized/self-life-app-01.webp"
                     alt=""
                     class="routine-scatter-icon routine-scatter-icon-2"
                   />
                   <img
-                    src="assets/self-life-app-03.svg"
+                    src="assets/optimized/self-life-app-03.webp"
                     alt=""
                     class="routine-scatter-icon routine-scatter-icon-3"
                   />
                   <img
-                    src="assets/self-life-app-04.svg"
+                    src="assets/optimized/self-life-app-04.webp"
                     alt=""
                     class="routine-scatter-icon routine-scatter-icon-4"
                   />
@@ -521,21 +524,21 @@
                     decoding="async"
                   />
                   <figcaption class="routine-scroll-hint">
-                    <img src="assets/routine-color-key.svg" alt="" aria-hidden="true" class="routine-scroll-hint-icon" />
+                    <img src="assets/about/routine-color-key.svg" alt="" aria-hidden="true" class="routine-scroll-hint-icon" />
                     <span>一周日程</span>
                   </figcaption>
                 </figure>
                 <figure class="memory-shot routine-scroll-shot">
                   <div class="routine-scroll-window" aria-label="摸狗丽丽的记录分享，可滚动查看完整内容">
                     <img
-                      src="assets/self-life-dog-record.svg"
+                      src="assets/about/self-life-dog-record.svg"
                       alt="摸狗丽丽的记录分享长图记录"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
                   <figcaption class="routine-scroll-hint">
-                    <img src="assets/routine-color-key.svg" alt="" aria-hidden="true" class="routine-scroll-hint-icon" />
+                    <img src="assets/about/routine-color-key.svg" alt="" aria-hidden="true" class="routine-scroll-hint-icon" />
                     <span>色块解释</span>
                   </figcaption>
                 </figure>
@@ -547,12 +550,12 @@
                 <div class="acknowledgements-aside-art">
                   <span class="acknowledgements-title">Thanks</span>
                   <img
-                    src="./assets/acknowledgement-chat.svg"
+                    src="./assets/acknowledgement/chat.svg"
                     alt=""
                     class="acknowledgement-doodle acknowledgement-doodle-left"
                   />
                   <img
-                    src="./assets/acknowledgement-fingers-crossed.svg"
+                    src="./assets/acknowledgement/fingers-crossed.svg"
                     alt=""
                     class="acknowledgement-doodle acknowledgement-doodle-right"
                   />
@@ -562,7 +565,7 @@
                 <p class="acknowledgement-line acknowledgement-line-1">
                   <span>感谢</span>
                   <span class="acknowledgement-name">
-                    <img src="./assets/tool03.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
+                    <img src="./assets/optimized/tool03.webp" alt="" class="acknowledgement-logo" aria-hidden="true" />
                     <span>codex</span>
                   </span>
                   <span>支持我编写个人网站</span>
@@ -570,7 +573,7 @@
                 <p class="acknowledgement-line acknowledgement-line-2">
                   <span>感谢</span>
                   <span class="acknowledgement-name">
-                    <img src="./assets/tool01.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
+                    <img src="./assets/tools/figma.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
                     <span>Figma</span>
                   </span>
                   <span>永恒的陪伴</span>
@@ -578,7 +581,7 @@
                 <p class="acknowledgement-line acknowledgement-line-3">
                   <span>感谢</span>
                   <span class="acknowledgement-name">
-                    <img src="./assets/tool02.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
+                    <img src="./assets/tools/chatgpt.svg" alt="" class="acknowledgement-logo" aria-hidden="true" />
                     <span>GPT</span>
                   </span>
                   <span>作为我设计上的朋友</span>
@@ -601,7 +604,7 @@
                 </p>
                 <p class="acknowledgement-line acknowledgement-line-8 acknowledgement-line-last">感谢看到这里的你</p>
                 <div class="acknowledgement-closing-mark" aria-hidden="true">
-                  <img src="./assets/underline-squiggle-3.svg" alt="" class="acknowledgement-closing-squiggle" />
+                  <img src="./assets/acknowledgement/underline-squiggle.svg" alt="" class="acknowledgement-closing-squiggle" />
                 </div>
               </div>
             </article>

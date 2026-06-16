@@ -8,17 +8,18 @@ function initSiteLoading() {
   const loadingLayer = document.querySelector(".site-loading");
   const progressBar = loadingLayer?.querySelector(".site-loading-track");
 
-  if (!loadingLayer || loadingLayer.hidden) {
+  if (!loadingLayer) {
     return;
   }
 
   const startedAt = Date.now();
+  const showDelay = 450;
   const minimumVisibleTime = 520;
   const maximumVisibleTime = 3600;
   let progress = 0;
   let loadingComplete = false;
-
-  document.body.classList.add("is-loading");
+  let loadingVisible = false;
+  let progressTimer = 0;
 
   function setProgress(value) {
     progress = Math.max(progress, Math.min(value, 100));
@@ -29,14 +30,32 @@ function initSiteLoading() {
     }
   }
 
-  const progressTimer = window.setInterval(() => {
-    if (loadingComplete) {
+  function startProgress() {
+    if (progressTimer) {
       return;
     }
 
-    const nextProgress = progress + Math.max(2, (88 - progress) * 0.12);
-    setProgress(Math.min(nextProgress, 88));
-  }, 130);
+    progressTimer = window.setInterval(() => {
+      if (loadingComplete) {
+        return;
+      }
+
+      const nextProgress = progress + Math.max(2, (88 - progress) * 0.12);
+      setProgress(Math.min(nextProgress, 88));
+    }, 130);
+  }
+
+  function showLoading() {
+    if (loadingComplete || loadingVisible) {
+      return;
+    }
+
+    loadingVisible = true;
+    loadingLayer.hidden = false;
+    document.body.classList.add("is-loading");
+    setProgress(56);
+    startProgress();
+  }
 
   function waitForImage(image) {
     if (image.complete && image.naturalWidth > 0) {
@@ -91,7 +110,15 @@ function initSiteLoading() {
     }
 
     loadingComplete = true;
+    window.clearTimeout(showTimer);
+    window.clearTimeout(maximumTimer);
     window.clearInterval(progressTimer);
+
+    if (!loadingVisible) {
+      loadingLayer.remove();
+      return;
+    }
+
     setProgress(100);
 
     const elapsed = Date.now() - startedAt;
@@ -106,8 +133,10 @@ function initSiteLoading() {
     }, waitTime);
   }
 
+  const showTimer = window.setTimeout(showLoading, showDelay);
+  const maximumTimer = window.setTimeout(hideLoading, maximumVisibleTime);
+
   waitForMainResources().then(hideLoading);
-  window.setTimeout(hideLoading, maximumVisibleTime);
 }
 
 initSiteLoading();
@@ -427,8 +456,8 @@ function initDynamicDetailNavBackground() {
     document.body.style.setProperty(
       "--detail-home-normal-dynamic",
       foregroundColor[0] === 244
-        ? 'url("./assets/detail-home-normal-light.svg")'
-        : 'url("./assets/detail-home-normal-dark.svg")',
+        ? 'url("./assets/detail-nav/home-normal-light.svg")'
+        : 'url("./assets/detail-nav/home-normal-dark.svg")',
     );
   }
 
@@ -446,13 +475,29 @@ function initDynamicDetailNavBackground() {
 
 function initDetailLoadingState() {
   const loading = document.querySelector(".detail-loading");
-  const detailResource = document.querySelector(".detail-image, .detail-object");
+  const detailResource = document.querySelector(".detail-image, .detail-object, .detail-slice-image");
 
   if (!loading || !detailResource) {
     return;
   }
 
+  const startedAt = Date.now();
+  const showDelay = 450;
+  const minimumVisibleTime = 420;
+  const maximumVisibleTime = 5200;
   let isDone = false;
+  let isVisible = false;
+  let showTimer = 0;
+  let maximumTimer = 0;
+
+  function showLoading() {
+    if (isDone || isVisible) {
+      return;
+    }
+
+    isVisible = true;
+    loading.hidden = false;
+  }
 
   function hideLoading() {
     if (isDone) {
@@ -460,10 +505,23 @@ function initDetailLoadingState() {
     }
 
     isDone = true;
-    loading.classList.add("is-hidden");
-    loading.addEventListener("transitionend", () => {
+    window.clearTimeout(showTimer);
+    window.clearTimeout(maximumTimer);
+
+    if (!isVisible) {
       loading.remove();
-    }, { once: true });
+      return;
+    }
+
+    const elapsed = Date.now() - startedAt;
+    const waitTime = Math.max(0, minimumVisibleTime - elapsed);
+
+    window.setTimeout(() => {
+      loading.classList.add("is-hidden");
+      loading.addEventListener("transitionend", () => {
+        loading.remove();
+      }, { once: true });
+    }, waitTime);
   }
 
   if (detailResource instanceof HTMLImageElement && detailResource.complete) {
@@ -471,9 +529,11 @@ function initDetailLoadingState() {
     return;
   }
 
+  showTimer = window.setTimeout(showLoading, showDelay);
+  maximumTimer = window.setTimeout(hideLoading, maximumVisibleTime);
+
   detailResource.addEventListener("load", hideLoading, { once: true });
   detailResource.addEventListener("error", hideLoading, { once: true });
-  window.setTimeout(hideLoading, 5200);
 }
 
 function setActiveNav(key) {
