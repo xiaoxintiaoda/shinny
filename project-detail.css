@@ -122,6 +122,85 @@ a {
   z-index: -1;
 }
 
+body[data-detail-nav-gradient] .detail-nav::before {
+  transition: background 0.18s linear;
+}
+
+body[data-detail-nav-gradient] .detail-nav-title,
+body[data-detail-nav-gradient] .detail-nav-link {
+  color: var(--detail-nav-fg, #f4f8ff);
+  transition: color 0.22s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+body[data-detail-nav-gradient] .detail-nav-link::before {
+  content: none;
+}
+
+body[data-detail-nav-gradient] .detail-nav-link-frame {
+  position: absolute;
+  inset: -2px -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 4px);
+  overflow: visible;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body[data-detail-nav-gradient] .detail-nav-link-frame path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill 0.22s ease, stroke 0.22s ease;
+}
+
+body[data-detail-nav-gradient] .detail-nav-link:hover .detail-nav-link-frame path,
+body[data-detail-nav-gradient] .detail-nav-link:focus-visible .detail-nav-link-frame path {
+  fill: var(--detail-accent);
+  stroke: var(--detail-accent);
+}
+
+body[data-detail-nav-gradient] .detail-nav-inline-icon {
+  display: block;
+  flex: 0 0 auto;
+  color: currentColor;
+  overflow: visible;
+}
+
+body[data-detail-nav-gradient] .detail-nav-inline-arrow {
+  width: 22px;
+  height: 22px;
+}
+
+body[data-detail-nav-gradient] .detail-nav-inline-arrow path {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+body[data-detail-nav-gradient] .detail-nav-link-home .detail-nav-link-icon {
+  background-color: transparent;
+  background-image: var(
+    --detail-home-normal-dynamic,
+    url("./assets/detail-home-normal-light.svg")
+  );
+}
+
+body[data-detail-nav-gradient] .detail-nav-link-home:hover .detail-nav-link-icon,
+body[data-detail-nav-gradient] .detail-nav-link-home:focus-visible .detail-nav-link-icon {
+  background-image: var(--detail-nav-icon-hover);
+}
+
+body[data-detail-nav-gradient] .detail-nav-link-prev:hover,
+body[data-detail-nav-gradient] .detail-nav-link-prev:focus-visible {
+  color: #ffffff;
+}
+
+body[data-detail-nav-gradient] .detail-nav-link-home:hover,
+body[data-detail-nav-gradient] .detail-nav-link-home:focus-visible {
+  color: var(--detail-accent);
+}
+
 .detail-nav-group {
   display: flex;
   align-items: center;
@@ -254,8 +333,8 @@ a {
 }
 
 .detail-nav-link-home {
-  --detail-nav-icon: url("./assets/detail-home-line-gray.svg");
-  --detail-nav-icon-hover: url("./assets/detail-home-solid-red.svg");
+  --detail-nav-icon: url("./assets/detail-home-normal.svg");
+  --detail-nav-icon-hover: url("./assets/detail-home-hover.svg");
 }
 
 .detail-nav-link-next {
@@ -282,6 +361,10 @@ a {
   aspect-ratio: var(--detail-object-aspect, 1920 / 20068);
   min-height: 100vh;
   border: 0;
+}
+
+.detail-object-xr {
+  background: #000916;
 }
 
 .detail-figure {

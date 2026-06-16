@@ -7,7 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260615-rabbit-fit" />
   </head>
   <body>
     <div class="page-shell">
@@ -16,9 +16,9 @@
           <span>Shinny</span>
         </a>
         <nav class="nav">
-          <a href="#design-story" data-nav="design-story" class="nav-link nav-link-story">
-            <img src="./assets/nav-icon-3.svg" class="nav-link-icon" alt="" aria-hidden="true" />
-            <span class="nav-link-label">我与设计</span>
+          <a href="#hero" data-nav="hero" class="nav-link nav-link-home active" aria-current="page">
+            <img src="./assets/nav-icon-home.svg" class="nav-link-icon" alt="" aria-hidden="true" />
+            <span class="nav-link-label">首页</span>
           </a>
           <a href="#projects" data-nav="projects" class="nav-link nav-link-projects">
             <img src="./assets/nav-icon-1.svg" class="nav-link-icon" alt="" aria-hidden="true" />
@@ -39,8 +39,8 @@
                 <div class="hero-welcome-stack">
                   <div class="hero-emotion-switcher" aria-hidden="true">
                     <img src="./assets/hero-expression-01.svg" alt="" class="hero-emotion hero-emotion-1" />
-                    <img src="./assets/hero-expression-02.svg" alt="" class="hero-emotion hero-emotion-2" />
-                    <img src="./assets/hero-expression-03.svg" alt="" class="hero-emotion hero-emotion-3" />
+                    <img src="./assets/hero-expression-03.svg" alt="" class="hero-emotion hero-emotion-2" />
+                    <img src="./assets/hero-expression-02.svg" alt="" class="hero-emotion hero-emotion-3" />
                   </div>
                   <div class="hero-welcome-frame">
                     <img
@@ -66,6 +66,7 @@
           id="design-story"
           class="section design-story"
           data-section="design-story"
+          hidden
         >
           <div class="section-head design-story-head is-hidden">
             <h2>我与设计</h2>
@@ -73,7 +74,7 @@
           </div>
 
           <div class="design-grid">
-            <article class="panel radar-panel reveal">
+            <article class="panel radar-panel reveal" hidden>
               <div class="panel-head">
                 <h3>我的能力</h3>
                 <span>六边形雷达图</span>
@@ -125,7 +126,7 @@
               </svg>
             </article>
 
-            <article class="panel toolbox-panel reveal">
+            <article class="panel toolbox-panel reveal" hidden>
               <div class="panel-head">
                 <h3>我的工具箱</h3>
                 <span>Software</span>
@@ -158,7 +159,7 @@
               </div>
             </article>
 
-            <article class="panel workflow-panel reveal">
+            <article class="panel workflow-panel reveal" hidden>
               <div class="panel-head">
                 <h3>AI时代的设计工作流</h3>
                 <span>AI 时代</span>
@@ -264,7 +265,6 @@
               <div class="project-meta project-copy">
                 <h3>情绪花园</h3>
                 <p class="project-desc">以记录生活日常和情绪反应为主的 模拟种花养成系小游戏</p>
-                <p class="project-time">2025</p>
                 <div class="project-tags">
                   <span class="project-tag-medium">UI/UX</span>
                   <span class="project-tag-long">Mobile端</span>
@@ -295,7 +295,6 @@
               <div class="project-meta project-copy">
                 <h3>轻游梦工坊官网</h3>
                 <p class="project-desc">腾讯旗下无代码游戏编辑器的官方网站和小程序，为创作者提供社区交流、文档教程的平台</p>
-                <p class="project-time">2024-2025</p>
                 <div class="project-tags">
                   <span class="project-tag-short">UI</span>
                   <span class="project-tag-medium">Web端</span>
@@ -327,7 +326,6 @@
               <div class="project-meta project-copy">
                 <h3>Tencent XR</h3>
                 <p class="project-desc">XR（扩展现实技术），从头显端到官网的全方位原生系统建设。</p>
-                <p class="project-time">2022</p>
                 <div class="project-tags">
                   <span class="project-tag-medium">UI/UX</span>
                   <span class="project-tag-long">头显端</span>
@@ -360,16 +358,15 @@
               <div class="project-meta project-copy">
                 <h3>AIGC运营设计</h3>
                 <p class="project-desc">在AI对话中轻松学习口语</p>
-                <p class="project-time">2026</p>
                 <div class="project-tags">
                   <span class="project-tag-medium">UI/UX</span>
                   <span class="project-tag-long">Mobile端</span>
                 </div>
               </div>
-              <a
-                class="project-cover cover-c tilt-card project-cover-link"
-                href="./lingo-ai-detail.html"
-                aria-label="打开Lingo AI项目详情"
+              <div
+                class="project-cover cover-c tilt-card project-cover-locked"
+                aria-label="AIGC运营设计项目制作中"
+                aria-disabled="true"
               >
                 <span class="project-cover-ornament ornament-top-right" aria-hidden="true">
                   <img src="./assets/project-cover-decor-top-right.svg" alt="" class="project-cover-ornament-image" />
@@ -384,12 +381,18 @@
                 <div class="project-cover-media">
                   <img src="./assets/project-cover-3.png" alt="Lingo AI 项目封面" class="project-cover-image" />
                 </div>
-              </a>
+                <span class="project-cover-status" aria-hidden="true">制作中</span>
+              </div>
             </article>
           </div>
         </section>
 
         <section id="about" class="section about" data-section="about">
+          <div class="about-rabbit-scene" aria-hidden="true">
+            <span class="about-rabbit-dust about-rabbit-dust-1"></span>
+            <span class="about-rabbit-dust about-rabbit-dust-2"></span>
+            <img src="./assets/rabbit.svg" alt="" class="about-rabbit" />
+          </div>
           <div class="section-head reveal">
             <h2>生活里的我</h2>
           </div>
@@ -417,28 +420,6 @@
             </article>
 
             <article class="about-card about-card-routine reveal">
-              <div class="routine-app-cloud" aria-hidden="true">
-                <img
-                  src="assets/self-life-app-02.svg"
-                  alt=""
-                  class="routine-scatter-icon routine-scatter-icon-1"
-                />
-                <img
-                  src="assets/self-life-app-01.svg"
-                  alt=""
-                  class="routine-scatter-icon routine-scatter-icon-2"
-                />
-                <img
-                  src="assets/self-life-app-03.svg"
-                  alt=""
-                  class="routine-scatter-icon routine-scatter-icon-3"
-                />
-                <img
-                  src="assets/self-life-app-04.svg"
-                  alt=""
-                  class="routine-scatter-icon routine-scatter-icon-4"
-                />
-              </div>
               <div class="about-intro">
                 <div>
                   <h3>自我生活的管理者</h3>
@@ -448,6 +429,28 @@
                 </div>
               </div>
               <div class="about-gallery about-gallery-routine">
+                <div class="routine-app-cloud" aria-hidden="true">
+                  <img
+                    src="assets/self-life-app-02.svg"
+                    alt=""
+                    class="routine-scatter-icon routine-scatter-icon-1"
+                  />
+                  <img
+                    src="assets/self-life-app-01.svg"
+                    alt=""
+                    class="routine-scatter-icon routine-scatter-icon-2"
+                  />
+                  <img
+                    src="assets/self-life-app-03.svg"
+                    alt=""
+                    class="routine-scatter-icon routine-scatter-icon-3"
+                  />
+                  <img
+                    src="assets/self-life-app-04.svg"
+                    alt=""
+                    class="routine-scatter-icon routine-scatter-icon-4"
+                  />
+                </div>
                 <figure class="memory-shot routine-calendar-frame">
                   <img src="assets/self-life-calendar-frame.png" alt="2026年5月的日历周视图记录" />
                   <figcaption class="routine-scroll-hint">
@@ -544,6 +547,6 @@
       </main>
     </div>
 
-    <script src="./script.js"></script>
+    <script src="./script.js?v=20260615-rabbit-hop"></script>
   </body>
 </html>

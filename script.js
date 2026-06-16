@@ -1,6 +1,6 @@
 const sectionMap = {
+  hero: "hero",
   projects: "projects",
-  "design-story": "design-story",
   about: "about",
 };
 
@@ -24,12 +24,14 @@ const CLICK_EFFECT_RED_IMAGE_MARKERS = [
   "nav-tab-active.svg",
   "nav-tab-wide-active.svg",
   "detail-nav-fill.svg",
-  "detail-home-solid-red.svg",
+  "detail-home-hover.svg",
 ];
 
 const navLinks = Array.from(document.querySelectorAll(".nav-link"));
 const observedSections = Array.from(document.querySelectorAll("[data-section]"));
 const revealItems = Array.from(document.querySelectorAll(".reveal"));
+const aboutSection = document.querySelector("#about");
+const aboutHeading = aboutSection?.querySelector(".section-head");
 const clickEffectCanvas = document.createElement("canvas");
 const clickEffectContext = clickEffectCanvas.getContext("2d", { willReadFrequently: true });
 
@@ -217,7 +219,10 @@ function syncDetailObjectAspectRatio() {
 
   if (detailObject.contentDocument?.documentElement) {
     updateFromLoadedObject();
-  } else if (detailObject.data) {
+  } else if (
+    detailObject.data &&
+    !detailObject.style.getPropertyValue("--detail-object-aspect").trim()
+  ) {
     fetch(detailObject.data)
       .then((response) => {
         if (!response.ok) {
@@ -235,9 +240,111 @@ function syncDetailObjectAspectRatio() {
   }
 }
 
+function initDynamicDetailNavBackground() {
+  if (document.body.dataset.detailNavGradient !== "tencent-xr") {
+    return;
+  }
+
+  const detailImage = document.querySelector(".detail-image, .detail-object");
+  if (!detailImage) {
+    return;
+  }
+
+  const gradientStops = [
+    [0, [0, 9, 22]],
+    [0.256586, [0, 9, 22]],
+    [0.327872, [26, 117, 239]],
+    [0.386189, [160, 201, 255]],
+    [0.6875, [219, 231, 255]],
+    [1, [226, 236, 255]],
+  ];
+
+  function interpolateColor(progress) {
+    const nextIndex = gradientStops.findIndex(([offset]) => offset >= progress);
+    if (nextIndex <= 0) {
+      return gradientStops[0][1];
+    }
+
+    if (nextIndex === -1) {
+      return gradientStops[gradientStops.length - 1][1];
+    }
+
+    const [startOffset, startColor] = gradientStops[nextIndex - 1];
+    const [endOffset, endColor] = gradientStops[nextIndex];
+    const amount = (progress - startOffset) / (endOffset - startOffset);
+
+    return startColor.map((channel, index) => {
+      return Math.round(channel + (endColor[index] - channel) * amount);
+    });
+  }
+
+  function relativeLuminance(color) {
+    const channels = color.map((channel) => {
+      const value = channel / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    });
+
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+  }
+
+  function contrastRatio(firstColor, secondColor) {
+    const lighter = Math.max(relativeLuminance(firstColor), relativeLuminance(secondColor));
+    const darker = Math.min(relativeLuminance(firstColor), relativeLuminance(secondColor));
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+
+  function getForegroundColor(backgroundColor) {
+    const lightForeground = [244, 248, 255];
+    const darkForeground = [28, 45, 70];
+    const lightContrast = contrastRatio(backgroundColor, lightForeground);
+    const darkContrast = contrastRatio(backgroundColor, darkForeground);
+
+    return lightContrast >= darkContrast ? lightForeground : darkForeground;
+  }
+
+  let frameId = 0;
+
+  function updateHeaderColor() {
+    frameId = 0;
+    const imageTop = detailImage.offsetTop;
+    const imageHeight = detailImage.offsetHeight;
+    const sampleY = window.scrollY + 34 - imageTop;
+    const progress = Math.max(0, Math.min(1, sampleY / imageHeight));
+    const color = interpolateColor(progress);
+    const foregroundColor = getForegroundColor(color);
+
+    document.body.style.setProperty("--detail-header-bg", `rgb(${color.join(", ")})`);
+    document.body.style.setProperty("--detail-header-bg-rgb", color.join(", "));
+    document.body.style.setProperty("--detail-nav-fg", `rgb(${foregroundColor.join(", ")})`);
+    document.body.style.setProperty(
+      "--detail-home-normal-dynamic",
+      foregroundColor[0] === 244
+        ? 'url("./assets/detail-home-normal-light.svg")'
+        : 'url("./assets/detail-home-normal-dark.svg")',
+    );
+  }
+
+  function requestHeaderUpdate() {
+    if (!frameId) {
+      frameId = window.requestAnimationFrame(updateHeaderColor);
+    }
+  }
+
+  window.addEventListener("scroll", requestHeaderUpdate, { passive: true });
+  window.addEventListener("resize", requestHeaderUpdate);
+  detailImage.addEventListener("load", requestHeaderUpdate);
+  requestHeaderUpdate();
+}
+
 function setActiveNav(key) {
   navLinks.forEach((link) => {
-    link.classList.toggle("active", link.dataset.nav === key);
+    const isActive = link.dataset.nav === key;
+    link.classList.toggle("active", isActive);
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   });
 }
 
@@ -246,6 +353,10 @@ function updateActiveNavByScroll() {
   let currentSection = "hero";
 
   observedSections.forEach((section) => {
+    if (section.hidden || section.getClientRects().length === 0) {
+      return;
+    }
+
     const rect = section.getBoundingClientRect();
     if (rect.top <= checkpoint) {
       currentSection = section.dataset.section;
@@ -256,7 +367,10 @@ function updateActiveNavByScroll() {
   if (mapped) {
     setActiveNav(mapped);
   } else {
-    navLinks.forEach((link) => link.classList.remove("active"));
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      link.removeAttribute("aria-current");
+    });
   }
 }
 
@@ -277,6 +391,25 @@ const revealObserver = new IntersectionObserver(
     rootMargin: "0px 0px -8% 0px",
   }
 );
+
+if (aboutSection && aboutHeading) {
+  const rabbitObserver = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) {
+        return;
+      }
+
+      aboutSection.classList.add("rabbit-playing");
+      rabbitObserver.disconnect();
+    },
+    {
+      threshold: 0.2,
+      rootMargin: "0px 0px -12% 0px",
+    }
+  );
+
+  rabbitObserver.observe(aboutHeading);
+}
 
 function initGlobalClickEffect() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -319,8 +452,29 @@ function initGlobalClickEffect() {
   });
 }
 
+function initLockedProjectStatus() {
+  document.querySelectorAll(".project-cover-locked").forEach((cover) => {
+    cover.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") {
+        return;
+      }
+
+      const rect = cover.getBoundingClientRect();
+      cover.style.setProperty("--project-status-x", `${event.clientX - rect.left}px`);
+      cover.style.setProperty("--project-status-y", `${event.clientY - rect.top}px`);
+      cover.classList.add("is-pointer-active");
+    });
+
+    cover.addEventListener("pointerleave", () => {
+      cover.classList.remove("is-pointer-active");
+    });
+  });
+}
+
 initGlobalClickEffect();
+initLockedProjectStatus();
 syncDetailObjectAspectRatio();
+initDynamicDetailNavBackground();
 
 revealItems.forEach((item, index) => {
   item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
