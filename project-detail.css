@@ -302,8 +302,6 @@ body[data-detail-nav-gradient] .detail-nav-link-home:focus-visible {
   transform: translateY(-1px);
   opacity: 1;
   color: #ffffff;
-  outline: 3px dashed var(--detail-accent);
-  outline-offset: 5px;
 }
 
 .detail-nav-link:hover::before,
