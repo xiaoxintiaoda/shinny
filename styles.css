@@ -1,12 +1,17 @@
 @font-face {
   font-family: "FZLanTingYuanGBK";
   src: local("FZLanTingYuanGBK SemiBold"), local("FZLanTingYuanGBK-SemiBold"),
-    local("FZLanTingYuanGBK--S10"), local("FZLanTingYuanS-DB1-GB");
+    local("FZLanTingYuanGBK--S10"), local("FZLanTingYuanS-DB1-GB"),
+    url("./assets/fonts/FZLanTingYuanGBK.woff2") format("woff2"),
+    url("./assets/fonts/FZLanTingYuanGBK.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 :root {
+  --font-main: "FZLanTingYuanGBK", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    sans-serif;
   --bg: #faf9f6;
   --paper: #faf9f6;
   --ink: #2f2621;
@@ -45,8 +50,7 @@ body {
   margin: 0;
   background: #faf9f6;
   color: var(--ink);
-  font-family: "FZLanTingYuanGBK", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    sans-serif;
+  font-family: var(--font-main);
   overflow-x: hidden;
 }
 
@@ -401,7 +405,8 @@ main::after,
 }
 
 .nav-link:focus-visible {
-  outline: none;
+  outline: 3px dashed #b9372e;
+  outline-offset: 4px;
 }
 
 .section {
@@ -891,6 +896,8 @@ main::after,
   color: var(--project-cover-hover-accent);
   transform: rotate(0deg);
   box-shadow: 0 20px 36px rgba(47, 38, 33, 0.12);
+  outline: 3px dashed #b9372e;
+  outline-offset: 8px;
 }
 
 .project-cover.is-hovered {
@@ -2426,6 +2433,13 @@ main::after,
 
   .nav {
     gap: 4px 1.6px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-link {
@@ -2524,6 +2538,16 @@ main::after,
 
   .project-copy {
     max-width: 100%;
+  }
+
+  .project-row {
+    gap: 22px;
+    padding: 46px 0;
+  }
+
+  .project-cover {
+    --project-cover-radius: 30px;
+    aspect-ratio: 1.42 / 1;
   }
 
   .project-desc {

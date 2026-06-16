@@ -444,6 +444,38 @@ function initDynamicDetailNavBackground() {
   requestHeaderUpdate();
 }
 
+function initDetailLoadingState() {
+  const loading = document.querySelector(".detail-loading");
+  const detailResource = document.querySelector(".detail-image, .detail-object");
+
+  if (!loading || !detailResource) {
+    return;
+  }
+
+  let isDone = false;
+
+  function hideLoading() {
+    if (isDone) {
+      return;
+    }
+
+    isDone = true;
+    loading.classList.add("is-hidden");
+    loading.addEventListener("transitionend", () => {
+      loading.remove();
+    }, { once: true });
+  }
+
+  if (detailResource instanceof HTMLImageElement && detailResource.complete) {
+    hideLoading();
+    return;
+  }
+
+  detailResource.addEventListener("load", hideLoading, { once: true });
+  detailResource.addEventListener("error", hideLoading, { once: true });
+  window.setTimeout(hideLoading, 5200);
+}
+
 function setActiveNav(key) {
   navLinks.forEach((link) => {
     const isActive = link.dataset.nav === key;
@@ -583,6 +615,7 @@ initGlobalClickEffect();
 initLockedProjectStatus();
 syncDetailObjectAspectRatio();
 initDynamicDetailNavBackground();
+initDetailLoadingState();
 
 revealItems.forEach((item, index) => {
   item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;

@@ -24,11 +24,16 @@
     </header>
 
     <main class="detail-main">
+      <div class="detail-loading" role="status" aria-live="polite">
+        <span>作品加载中</span>
+      </div>
       <figure class="detail-figure">
         <img
           class="detail-image"
           src="./assets/emotion-garden-detail-pages/page-001.png"
           alt="情绪花园项目详情页"
+          decoding="async"
+          fetchpriority="high"
         />
       </figure>
     </main>
