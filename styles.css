@@ -881,8 +881,6 @@ main::after,
   color: var(--project-cover-hover-accent);
   transform: rotate(0deg);
   box-shadow: 0 20px 36px rgba(47, 38, 33, 0.12);
-  outline: 3px dashed #b9372e;
-  outline-offset: 8px;
 }
 
 .project-cover.is-hovered {
